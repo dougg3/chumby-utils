@@ -201,17 +201,20 @@ return_free:
 static void bind_card_reader(void)
 {
 	// Send stderr to /dev/null; we don't care if this fails
-	system("echo " CARD_READER_USB_INTERFACE " > " USB_STORAGE_BIND_PATH " 2>/dev/null");
+	int r = system("echo " CARD_READER_USB_INTERFACE " > " USB_STORAGE_BIND_PATH " 2>/dev/null");
+	(void)r;
 }
 
 static void connect_card_reader(void)
 {
-	system("echo 1 > " CARD_READER_AUTHORIZED_PATH);
+	int r = system("echo 1 > " CARD_READER_AUTHORIZED_PATH);
+	(void)r;
 }
 
 static void disconnect_card_reader(void)
 {
-	system("echo 0 > " CARD_READER_AUTHORIZED_PATH);
+	int r = system("echo 0 > " CARD_READER_AUTHORIZED_PATH);
+	(void)r;
 }
 
 int main(int argc, char *argv[])
