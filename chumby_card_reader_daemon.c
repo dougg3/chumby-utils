@@ -186,6 +186,13 @@ static void remove_card_reader_quirk(void)
 		// This memmove will strip out any commas needed
 		memmove(move_dest, move_src, move_len);
 		
+		// If we ended up with an empty string, write a single newline instead.
+		// Writing an empty string doesn't clear the quirk.
+		if (quirks[0] == 0) {
+			quirks[0] = '\n';
+			quirks[1] = 0;
+		}
+
 		// Now write it back out
 		f = fopen(USB_STORAGE_QUIRKS_PATH, "wb");
 		if (f) {
